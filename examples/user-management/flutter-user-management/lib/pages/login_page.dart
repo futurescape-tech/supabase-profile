@@ -30,6 +30,8 @@ class _LoginPageState extends State<LoginPage> {
             kIsWeb ? null : 'io.supabase.flutterquickstart://login-callback/',
       );
       if (mounted) {
+        Navigator.of(context).pushReplacementNamed('/account');
+
         context.showSnackBar(message: 'Check your email for login link!');
         _emailController.clear();
       }

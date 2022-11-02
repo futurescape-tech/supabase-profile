@@ -11,6 +11,7 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  static const String USER_ID = 'ad3fd84a-4a90-47b1-b8b9-0767136e2f10'; //'de3dab28-4042-4411-9f67-49c2791e9e56';
   final _usernameController = TextEditingController();
   final _websiteController = TextEditingController();
   String? _avatarUrl;
@@ -23,7 +24,7 @@ class _AccountPageState extends State<AccountPage> {
     });
 
     try {
-      final userId = supabase.auth.currentUser!.id;
+      final userId = USER_ID;//supabase.auth.currentUser!.id;
       final data = await supabase
           .from('profiles')
           .select()
@@ -52,7 +53,7 @@ class _AccountPageState extends State<AccountPage> {
     final website = _websiteController.text;
     final user = supabase.auth.currentUser;
     final updates = {
-      'id': user!.id,
+      'id': USER_ID,// user!.id,
       'username': userName,
       'website': website,
       'updated_at': DateTime.now().toIso8601String(),
@@ -88,7 +89,7 @@ class _AccountPageState extends State<AccountPage> {
   /// Called when image has been uploaded to Supabase storage from within Avatar widget
   Future<void> _onUpload(String imageUrl) async {
     try {
-      final userId = supabase.auth.currentUser!.id;
+      final userId = USER_ID;//supabase.auth.currentUser!.id;
       await supabase.from('profiles').upsert({
         'id': userId,
         'avatar_url': imageUrl,
